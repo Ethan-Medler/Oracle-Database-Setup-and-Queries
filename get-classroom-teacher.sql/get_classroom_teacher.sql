@@ -35,7 +35,7 @@ BEGIN
 EXCEPTION
     WHEN no_data_found THEN
         RETURN NULL;
-END;
+END get_classroom_teacher;
 
 
 DECLARE
@@ -43,7 +43,7 @@ DECLARE
     l_school  VARCHAR(40)   :='Fayetteville-Manlius School';
     l_year   NUMBER    := 2021;
     l_semester VARCHAR(20)  :='spring';
-    l_teacher_name people.first_name%TYPE;
+    l_teacher_name VARCHAR(30);
 BEGIN
     l_teacher_name := get_classroom_teacher(
         subject_in => l_subject,
@@ -57,9 +57,9 @@ END;
 DECLARE
     l_subject  VARCHAR(20)  :='Science';
     l_school  VARCHAR(40)   :='Fayetteville-Manlius School';
-    l_year   NUMBER    := 2021;
+    l_year   NUMBER    := 2023;
     l_semester VARCHAR(20)  :='spring';
-    l_teacher_name people.first_name%TYPE;
+    l_teacher_name VARCHAR(30);
 BEGIN
     l_teacher_name := get_classroom_teacher(
         subject_in => l_subject,

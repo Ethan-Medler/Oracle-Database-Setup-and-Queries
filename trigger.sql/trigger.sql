@@ -12,20 +12,15 @@ DECLARE
     invalid_teacher_subject EXCEPTION;
 BEGIN
 
-    SELECT first_name || ' ' || last_name AS full_name, s.subject
-    INTO l_teacher_name, l_subject_name
+    SELECT first_name || ' ' || last_name AS full_name, s.subject, t.subject_id
+    INTO l_teacher_name, l_subject_name, l_subject_id
     FROM people p
     JOIN teachers t
     ON p.person_id = t.person_id
     JOIN subjects s
     ON t.subject_id = s.subject_id
     WHERE t.teacher_id = :NEW.teacher_id;
-    
-    SELECT subject_id
-    INTO l_subject_id
-    FROM teachers
-    WHERE teacher_id = :NEW.teacher_id;
-    
+
     IF :NEW.subject_id != l_subject_id THEN
         RAISE invalid_teacher_subject;
     END IF;
